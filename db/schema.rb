@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_182033) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_20_212550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -276,7 +276,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_182033) do
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
+    t.string "utm_content"
+    t.string "utm_term"
+    t.index ["created_at"], name: "index_page_visits_on_created_at"
     t.index ["user_id"], name: "index_page_visits_on_user_id"
+    t.index ["utm_source"], name: "index_page_visits_on_utm_source"
   end
 
   create_table "product_images", force: :cascade do |t|

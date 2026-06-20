@@ -44,26 +44,50 @@ class ApplicationController < ActionController::Base
 
   def track_visitor
     return if devise_controller?
-    store_utm_in_session if params[:utm_source].present?
 
-    PageVisit.create!(
+    utm = cleaned_utm_params
+    store_utm_in_session(utm) if utm[:utm_source].present?
+
+    PageVisit.create(
       user: current_user,
       landing_url: request.original_url,
       referring_url: request.referer,
-      utm_source: session[:utm_source],
-      utm_medium: session[:utm_medium],
-      utm_campaign: session[:utm_campaign],
       ip_address: request.remote_ip,
-      user_agent: request.user_agent
+      user_agent: request.user_agent,
+      utm_source: utm[:utm_source] || session[:utm_source],
+      utm_medium: utm[:utm_medium] || session[:utm_medium],
+      utm_campaign: utm[:utm_campaign] || session[:utm_campaign],
+      utm_content: utm[:utm_content] || session[:utm_content],
+      utm_term: utm[:utm_term] || session[:utm_term]
     )
   rescue => e
     Rails.logger.warn("[PageVisit] Failed to record: #{e.message}")
   end
 
-  def store_utm_in_session
-    session[:utm_source] = params[:utm_source] if params[:utm_source].present?
-    session[:utm_medium] = params[:utm_medium] if params[:utm_medium].present?
-    session[:utm_campaign] = params[:utm_campaign] if params[:utm_campaign].present?
+  def cleaned_utm_params
+    utm = {
+      utm_source: params[:utm_source],
+      utm_medium: params[:utm_medium],
+      utm_campaign: params[:utm_campaign],
+      utm_content: params[:utm_content],
+      utm_term: params[:utm_term]
+    }
+
+    # Fix double-encoded ampersands (common in email clients and some ad platforms)
+    if utm[:utm_source].present? && request.query_string.include?("&amp;")
+      fixed = Rack::Utils.parse_query(request.query_string.gsub("&amp;", "&"))
+      utm.each_key { |k| utm[k] = fixed[k.to_s] if utm[k].blank? && fixed[k.to_s].present? }
+    end
+
+    utm
+  end
+
+  def store_utm_in_session(utm)
+    session[:utm_source] = utm[:utm_source] if utm[:utm_source].present?
+    session[:utm_medium] = utm[:utm_medium] if utm[:utm_medium].present?
+    session[:utm_campaign] = utm[:utm_campaign] if utm[:utm_campaign].present?
+    session[:utm_content] = utm[:utm_content] if utm[:utm_content].present?
+    session[:utm_term] = utm[:utm_term] if utm[:utm_term].present?
   end
 
   def handle_not_found

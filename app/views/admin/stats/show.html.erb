@@ -1,0 +1,238 @@
+<div class="flex flex-col gap-6">
+
+  <%# ── Header ── %>
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-gray-900">App Stats</h1>
+    <div class="flex items-center gap-2">
+      <% [["1d", "1D"], ["7d", "7D"], ["30d", "30D"], ["90d", "90D"]].each do |range, label| %>
+        <%= link_to label, admin_stats_path(range: range),
+            class: "px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors #{@active_range == range ? 'bg-rose-100 text-rose-700' : 'bg-white text-gray-500 hover:text-gray-800 border border-gray-200'}" %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# ── Overview KPIs ── %>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Users</p>
+      <p class="text-3xl font-bold text-gray-900 mt-1"><%= number_with_delimiter(@overview[:total_users]) %></p>
+      <p class="text-xs text-gray-400 mt-1">+<%= @overview[:new_users_period] %> this period</p>
+    </div>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Orders</p>
+      <p class="text-3xl font-bold text-gray-900 mt-1"><%= number_with_delimiter(@overview[:orders_period]) %></p>
+      <p class="text-xs text-gray-400 mt-1"><%= @overview[:orders_today] %> today · <%= number_with_delimiter(@overview[:total_orders]) %> all time</p>
+    </div>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Revenue</p>
+      <p class="text-3xl font-bold text-gray-900 mt-1"><%= format_cents(@overview[:revenue_period_cents]) %></p>
+      <p class="text-xs text-gray-400 mt-1"><%= format_cents(@overview[:revenue_today_cents]) %> today · <%= format_cents(@overview[:total_revenue_cents]) %> all time</p>
+    </div>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Page Visits</p>
+      <p class="text-3xl font-bold text-gray-900 mt-1"><%= number_with_delimiter(@overview[:visits_period]) %></p>
+      <p class="text-xs text-gray-400 mt-1"><%= @overview[:visits_today] %> today · <%= number_with_delimiter(@overview[:total_visits]) %> all time</p>
+    </div>
+  </div>
+
+  <%# ── Traffic + Visitor Breakdown ── %>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+    <%# Traffic Stats -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">Traffic — Last <%= @days %>d</h2>
+      <div class="space-y-3">
+        <% [
+          ["Total Visits", @traffic[:total_visits]],
+          ["Guest Visits", @overview[:guest_visits_period]],
+          ["Logged-in Visits", @overview[:logged_in_visits_period]],
+          ["With Referrer", @traffic[:with_referrer]],
+          ["With UTM Tags", @traffic[:with_utm]],
+          ["Unique IPs", @traffic[:unique_ips]]
+        ].each do |label, count| %>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-500"><%= label %></span>
+            <span class="text-sm font-semibold text-gray-800"><%= number_with_delimiter(count) %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Orders by Status -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">Orders by Status</h2>
+      <% if @orders_by_status.any? %>
+        <div class="space-y-3">
+          <% @orders_by_status.sort_by { |_, v| -v }.each do |status, count| %>
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium <%= order_status_color(status) %>"><%= status.humanize %></span>
+              <span class="text-sm font-semibold text-gray-800"><%= count %></span>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-400">No orders yet.</p>
+      <% end %>
+    </div>
+
+    <%# Recent Signups -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">Recent Signups</h2>
+      <div class="space-y-2">
+        <% @recent_signups.each do |user| %>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-gray-800"><%= user.name %></p>
+              <p class="text-xs text-gray-400"><%= user.email %></p>
+            </div>
+            <p class="text-xs text-gray-400"><%= time_ago_in_words(user.created_at) %> ago</p>
+          </div>
+        <% end %>
+        <% if @recent_signups.empty? %>
+          <p class="text-xs text-gray-400">No signups yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# ── Daily Visits Chart (ASCII bar) ── %>
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h2 class="text-sm font-semibold text-gray-700 mb-4">Daily Visits — Last <%= @days %>d</h2>
+    <% max = @daily_visits.map { |d| d[:count] }.max.to_f.nonzero? || 1 %>
+    <div class="flex items-end gap-1 h-24">
+      <% @daily_visits.each do |day| %>
+        <div class="flex-1 flex flex-col items-center gap-1 group relative">
+          <div class="w-full bg-rose-500 rounded-t transition-all"
+               style="height: <%= [(day[:count] / max * 100).round, 2].max %>%;"
+               title="<%= day[:date] %>: <%= day[:count] %> visits">
+          </div>
+          <% if @days <= 14 %>
+            <span class="text-[9px] text-gray-400 rotate-45 origin-left mt-1"><%= day[:date] %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# ── UTM + Referrers + Top Pages ── %>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+    <%# UTM Sources -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">UTM Sources</h2>
+      <% if @utm_sources.any? %>
+        <% max_utm = @utm_sources.values.max.to_f %>
+        <div class="space-y-2">
+          <% @utm_sources.each do |source, count| %>
+            <div>
+              <div class="flex justify-between text-xs mb-0.5">
+                <span class="text-gray-600 font-medium"><%= source %></span>
+                <span class="text-gray-400"><%= count %></span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1.5">
+                <div class="bg-rose-400 h-1.5 rounded-full" style="width: <%= (count / max_utm * 100).round %>%"></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-400">No UTM-tagged visits yet.</p>
+      <% end %>
+    </div>
+
+    <%# UTM Campaigns -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">UTM Campaigns</h2>
+      <% if @utm_campaigns.any? %>
+        <% max_c = @utm_campaigns.values.max.to_f %>
+        <div class="space-y-2">
+          <% @utm_campaigns.each do |campaign, count| %>
+            <div>
+              <div class="flex justify-between text-xs mb-0.5">
+                <span class="text-gray-600 font-medium"><%= campaign %></span>
+                <span class="text-gray-400"><%= count %></span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1.5">
+                <div class="bg-indigo-400 h-1.5 rounded-full" style="width: <%= (count / max_c * 100).round %>%"></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-400">No campaign-tagged visits yet.</p>
+      <% end %>
+    </div>
+
+    <%# UTM Mediums -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">UTM Mediums</h2>
+      <% if @utm_mediums.any? %>
+        <% max_m = @utm_mediums.values.max.to_f %>
+        <div class="space-y-2">
+          <% @utm_mediums.each do |medium, count| %>
+            <div>
+              <div class="flex justify-between text-xs mb-0.5">
+                <span class="text-gray-600 font-medium"><%= medium %></span>
+                <span class="text-gray-400"><%= count %></span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1.5">
+                <div class="bg-emerald-400 h-1.5 rounded-full" style="width: <%= (count / max_m * 100).round %>%"></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-400">No medium-tagged visits yet.</p>
+      <% end %>
+    </div>
+
+    <%# Top Referrers -%>
+    <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+      <h2 class="text-sm font-semibold text-gray-700 mb-4">Top Referrers</h2>
+      <% if @top_referrers.any? %>
+        <% max_r = @top_referrers.values.max.to_f %>
+        <div class="space-y-2">
+          <% @top_referrers.each do |domain, count| %>
+            <div>
+              <div class="flex justify-between text-xs mb-0.5">
+                <span class="text-gray-600 font-medium truncate max-w-[200px]"><%= domain %></span>
+                <span class="text-gray-400"><%= count %></span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1.5">
+                <div class="bg-amber-400 h-1.5 rounded-full" style="width: <%= (count / max_r * 100).round %>%"></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-400">No referrer data yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# ── Top Pages ── %>
+  <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+    <h2 class="text-sm font-semibold text-gray-700 mb-4">Top Pages — Last <%= @days %>d</h2>
+    <% if @top_pages.any? %>
+      <% max_p = @top_pages.values.max.to_f %>
+      <div class="space-y-2">
+        <% @top_pages.each do |url, count| %>
+          <div class="flex items-center gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between text-xs mb-0.5">
+                <span class="text-gray-600 font-mono truncate"><%= url.gsub(/^https?:\/\/[^\/]+/, "") %></span>
+                <span class="text-gray-400 ml-2 shrink-0"><%= count %></span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1.5">
+                <div class="bg-rose-300 h-1.5 rounded-full" style="width: <%= (count / max_p * 100).round %>%"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-xs text-gray-400">No page visit data yet.</p>
+    <% end %>
+  </div>
+
+</div>

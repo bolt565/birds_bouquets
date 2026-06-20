@@ -78,6 +78,8 @@ Rails.application.routes.draw do
 
     resources :customers, only: [:index, :show]
 
+    resource :stats, only: [:show], controller: :stats
+
     resources :blog_posts do
       member do
         patch :publish
