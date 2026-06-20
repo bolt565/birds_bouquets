@@ -22,7 +22,7 @@ gem "omniauth-rails_csrf_protection"
 gem "good_job", "~> 4.0"
 
 # Payments
-gem "stripe", "~> 13.0"
+gem "stripe", "~> 19.2"
 
 # SEO
 gem "sitemap_generator", "~> 6.3"
