@@ -1,0 +1,15 @@
+regular_user:
+  name: "Alice Smith"
+  email: "alice@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, "password123") %>
+  admin: false
+  created_at: <%= 30.days.ago %>
+  updated_at: <%= 30.days.ago %>
+
+admin_user:
+  name: "Admin User"
+  email: "admin@birdsbouquets.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, "adminpass") %>
+  admin: true
+  created_at: <%= 60.days.ago %>
+  updated_at: <%= 60.days.ago %>

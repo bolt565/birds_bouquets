@@ -1,0 +1,15 @@
+order_confirmation_log:
+  user: regular_user
+  mailer_class: OrderMailer
+  mailer_action: order_confirmation
+  to_email: alice@example.com
+  subject: "Order Confirmed — BB-2026-00001"
+  body_html: "<p>Thank you for your order!</p>"
+
+admin_new_order_log:
+  user:
+  mailer_class: AdminMailer
+  mailer_action: new_order
+  to_email: admin@birdsbouquets.com
+  subject: "New Order BB-2026-00001"
+  body_html: "<p>New order received.</p>"

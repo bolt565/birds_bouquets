@@ -1,0 +1,65 @@
+<% content_for :title, "Shop Fresh Flowers — Birds Bouquets" %>
+<% content_for :meta_description, "Browse our full collection of fresh flower bouquets and arrangements. Same-day delivery available." %>
+
+<div class="flex flex-col md:flex-row gap-8">
+  <aside class="w-full md:w-56 flex-shrink-0">
+    <div class="bg-white border border-gray-100 rounded-xl p-5 sticky top-24">
+      <h2 class="font-semibold text-gray-900 mb-4">Filter</h2>
+
+      <%= form_with url: products_path, method: :get, data: { turbo: false } do |f| %>
+        <div class="mb-4">
+          <%= f.text_field :search, value: params[:search], placeholder: "Search flowers...",
+              class: "w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        </div>
+
+        <% if @categories.any? %>
+          <div class="mb-4">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Category</h3>
+            <% @categories.each do |category| %>
+              <label class="flex items-center gap-2 py-1.5 cursor-pointer">
+                <%= f.radio_button :category, category.slug, checked: params[:category] == category.slug,
+                    class: "text-rose-600 focus:ring-rose-300" %>
+                <span class="text-sm text-gray-700"><%= category.name %></span>
+              </label>
+            <% end %>
+            <% if params[:category].present? %>
+              <%= link_to "Clear", products_path(search: params[:search]), class: "text-xs text-rose-600 hover:underline mt-1 block" %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= f.submit "Apply", class: "w-full bg-rose-600 text-white text-sm font-medium py-2 rounded-lg hover:bg-rose-700 transition-colors cursor-pointer" %>
+      <% end %>
+    </div>
+  </aside>
+
+  <div class="flex-1">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-900">
+        <% if params[:category].present? && @current_category %>
+          <%= @current_category.name %>
+        <% elsif params[:search].present? %>
+          Results for "<%= params[:search] %>"
+        <% else %>
+          All Flowers
+        <% end %>
+      </h1>
+      <p class="text-sm text-gray-400"><%= pluralize(@products.count, "product") %></p>
+    </div>
+
+    <% if @products.any? %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% @products.each do |product| %>
+          <%= render ProductCardComponent.new(product: product) %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-20 text-gray-400">
+        <p class="text-5xl mb-4">🌸</p>
+        <p class="text-lg font-medium text-gray-500">No flowers found</p>
+        <p class="text-sm mt-2">Try adjusting your search or browse all products.</p>
+        <%= link_to "View All Flowers", products_path, class: "mt-4 inline-block text-rose-600 hover:underline text-sm" %>
+      </div>
+    <% end %>
+  </div>
+</div>

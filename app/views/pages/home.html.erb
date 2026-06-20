@@ -1,0 +1,75 @@
+<% content_for :title, "Fresh Flower Delivery | Birds Bouquets" %>
+<% content_for :meta_description, "Beautiful fresh flowers delivered to your door. Shop bouquets, arrangements, and seasonal blooms from Birds Bouquets." %>
+
+<section class="relative bg-gradient-to-br from-rose-50 to-pink-50 -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pt-20 pb-24">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl">
+      <h1 class="text-5xl sm:text-6xl font-bold text-gray-900 leading-tight mb-6">
+        Fresh Flowers,<br>
+        <span class="text-rose-600">Delivered with Love</span>
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+        Handcrafted bouquets sourced from local growers. Same-day delivery available. Every arrangement guaranteed fresh for 7+ days.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <%= link_to "Shop Now", products_path, class: "inline-flex items-center justify-center px-8 py-4 text-white bg-rose-600 hover:bg-rose-700 rounded-xl font-semibold text-lg transition-colors shadow-sm" %>
+        <%= link_to "Learn More", about_path, class: "inline-flex items-center justify-center px-8 py-4 text-gray-700 bg-white hover:bg-gray-50 border border-gray-200 rounded-xl font-semibold text-lg transition-colors" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% unless @categories.empty? %>
+  <section class="mt-16">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Shop by Category</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <% @categories.each do |category| %>
+        <%= link_to products_path(category: category.slug), class: "group block p-4 bg-white rounded-xl border border-gray-100 hover:border-rose-200 hover:shadow-md transition-all text-center" do %>
+          <div class="text-3xl mb-2">🌸</div>
+          <p class="font-semibold text-gray-800 group-hover:text-rose-600 transition-colors text-sm"><%= category.name %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
+<section class="mt-16">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-gray-900">Featured Bouquets</h2>
+    <%= link_to "View All", products_path, class: "text-rose-600 hover:text-rose-700 font-medium text-sm" %>
+  </div>
+
+  <% if @featured_products.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @featured_products.each do |product| %>
+        <%= render ProductCardComponent.new(product: product) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-16 text-gray-400">
+      <p class="text-lg">Our flower shop is being restocked. Check back soon!</p>
+      <%= link_to "Contact us", contact_path, class: "mt-4 inline-block text-rose-600 hover:underline" %>
+    </div>
+  <% end %>
+</section>
+
+<section class="mt-20 bg-white rounded-2xl border border-gray-100 p-8 sm:p-12">
+  <h2 class="text-2xl font-bold text-gray-900 text-center mb-10">Why Birds Bouquets?</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="text-center">
+      <div class="text-4xl mb-4">🌿</div>
+      <h3 class="font-semibold text-gray-900 mb-2">Farm Fresh</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Sourced daily from local and regional growers. Guaranteed fresh for 7+ days.</p>
+    </div>
+    <div class="text-center">
+      <div class="text-4xl mb-4">🚚</div>
+      <h3 class="font-semibold text-gray-900 mb-2">Same-Day Delivery</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Order by noon for same-day delivery. Next-day available for all orders nationwide.</p>
+    </div>
+    <div class="text-center">
+      <div class="text-4xl mb-4">💯</div>
+      <h3 class="font-semibold text-gray-900 mb-2">Happiness Guaranteed</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Not satisfied? Contact us within 24 hours and we'll make it right. No questions asked.</p>
+    </div>
+  </div>
+</section>

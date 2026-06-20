@@ -1,0 +1,36 @@
+<% content_for :title, "#{@post.meta_title.presence || @post.title} — Birds Bouquets" %>
+<% content_for :meta_description, @post.meta_description.presence || @post.excerpt.to_s.truncate(160) %>
+<% content_for :canonical_url, blog_show_url(@post.slug) %>
+
+<div class="max-w-3xl mx-auto">
+  <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+    <%= link_to "Home", root_path, class: "hover:text-rose-600" %>
+    <span>/</span>
+    <%= link_to "Blog", blog_path, class: "hover:text-rose-600" %>
+    <span>/</span>
+    <span class="text-gray-700 font-medium truncate"><%= @post.title %></span>
+  </nav>
+
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4"><%= @post.title %></h1>
+    <div class="flex items-center gap-4 text-sm text-gray-400">
+      <% if @post.author_name.present? %>
+        <span>By <%= @post.author_name %></span>
+        <span>&bull;</span>
+      <% end %>
+      <span><%= @post.published_at&.strftime("%B %d, %Y") %></span>
+    </div>
+  </header>
+
+  <div class="h-64 bg-gradient-to-br from-rose-50 to-pink-100 rounded-2xl flex items-center justify-center text-8xl mb-8">
+    🌸
+  </div>
+
+  <div class="prose prose-lg prose-rose max-w-none text-gray-700">
+    <%= @post.body.present? ? simple_format(@post.body) : content_tag(:p, "Coming soon...", class: "text-gray-400 text-center py-8") %>
+  </div>
+
+  <div class="mt-12 pt-8 border-t border-gray-100">
+    <%= link_to "← Back to Blog", blog_path, class: "text-rose-600 hover:text-rose-700 font-medium text-sm" %>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+pending_order:
+  user: regular_user
+  order_number: "BB-2026-00001"
+  status: "pending"
+  email: "alice@example.com"
+  subtotal_cents: 4999
+  shipping_cents: 0
+  tax_cents: 0
+  total_cents: 4999
+  shipping_name: "Alice Smith"
+  shipping_line1: "123 Main St"
+  shipping_city: "Austin"
+  shipping_state: "TX"
+  shipping_zip: "78701"
+  shipping_country: "US"
+
+paid_order:
+  user: regular_user
+  order_number: "BB-2026-00002"
+  status: "paid"
+  email: "alice@example.com"
+  subtotal_cents: 2999
+  shipping_cents: 0
+  tax_cents: 0
+  total_cents: 2999
+  stripe_payment_intent_id: "pi_test_paid"
+  shipping_name: "Alice Smith"
+  shipping_line1: "123 Main St"
+  shipping_city: "Austin"
+  shipping_state: "TX"
+  shipping_zip: "78701"
+  shipping_country: "US"
+  paid_at: 2026-06-01 12:00:00
+
+shipped_order:
+  user: regular_user
+  order_number: "BB-2026-00003"
+  status: "shipped"
+  email: "alice@example.com"
+  subtotal_cents: 4999
+  shipping_cents: 0
+  tax_cents: 0
+  total_cents: 4999
+  stripe_payment_intent_id: "pi_test_shipped"
+  tracking_number: "1Z999AA10123456784"
+  shipping_name: "Alice Smith"
+  shipping_line1: "123 Main St"
+  shipping_city: "Austin"
+  shipping_state: "TX"
+  shipping_zip: "78701"
+  shipping_country: "US"
+  paid_at: 2026-06-10 12:00:00
+  shipped_at: 2026-06-11 10:00:00

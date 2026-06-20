@@ -1,0 +1,44 @@
+<div class="py-6">
+  <% if cancelled %>
+    <div class="flex items-center gap-3 p-4 bg-red-50 rounded-xl border border-red-200">
+      <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+      <span class="font-medium text-red-700">Order <%= order.status.humanize %></span>
+    </div>
+  <% else %>
+    <div class="flex items-start">
+      <% STEPS.each_with_index do |step, index| %>
+        <% state = step_state(index) %>
+        <div class="flex flex-col items-center flex-1">
+          <div class="flex items-center w-full">
+            <% if index > 0 %>
+              <div class="flex-1 h-0.5 <%= state == :upcoming ? 'bg-gray-200' : 'bg-rose-400' %>"></div>
+            <% end %>
+            <div class="<%= case state
+              when :completed then 'w-8 h-8 bg-rose-500 rounded-full flex items-center justify-center'
+              when :active    then 'w-8 h-8 bg-rose-100 border-2 border-rose-500 rounded-full flex items-center justify-center'
+              else            'w-8 h-8 bg-gray-100 border-2 border-gray-200 rounded-full flex items-center justify-center'
+              end %>">
+              <% if state == :completed %>
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              <% elsif state == :active %>
+                <div class="w-3 h-3 bg-rose-500 rounded-full"></div>
+              <% else %>
+                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+              <% end %>
+            </div>
+            <% if index < STEPS.size - 1 %>
+              <div class="flex-1 h-0.5 <%= index < current_position ? 'bg-rose-400' : 'bg-gray-200' %>"></div>
+            <% end %>
+          </div>
+          <span class="mt-2 text-xs text-center leading-tight <%= state == :upcoming ? 'text-gray-400' : 'text-gray-700 font-medium' %>">
+            <%= step[:label] %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

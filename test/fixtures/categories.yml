@@ -1,0 +1,13 @@
+bouquets:
+  name: "Bouquets"
+  slug: "bouquets"
+  description: "Beautiful flower bouquets"
+  position: 1
+  active: true
+
+arrangements:
+  name: "Arrangements"
+  slug: "arrangements"
+  description: "Flowers in vases"
+  position: 2
+  active: true

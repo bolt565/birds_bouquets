@@ -1,0 +1,50 @@
+<% content_for :title, "Categories — Admin" %>
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Categories</h1>
+  <%= link_to "Add Category", new_admin_category_path, class: "inline-flex items-center px-4 py-2 bg-rose-600 text-white rounded-lg text-sm font-semibold hover:bg-rose-700 transition-colors" %>
+</div>
+
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 border-b border-gray-200">
+      <tr>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Slug</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Products</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="px-5 py-3"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% if @categories.any? %>
+        <% @categories.each do |cat| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-5 py-3 font-medium text-gray-900"><%= cat.name %></td>
+            <td class="px-5 py-3 text-gray-400 font-mono text-xs"><%= cat.slug %></td>
+            <td class="px-5 py-3 text-gray-500"><%= cat.products.count %></td>
+            <td class="px-5 py-3">
+              <span class="px-2.5 py-1 rounded-full text-xs font-semibold <%= cat.active? ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500' %>">
+                <%= cat.active? ? "Active" : "Inactive" %>
+              </span>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-3">
+                <%= link_to "Edit", edit_admin_category_path(cat), class: "text-xs text-blue-600 hover:underline" %>
+                <%= button_to "Delete", admin_category_path(cat), method: :delete,
+                    data: { turbo_confirm: "Delete '#{cat.name}'?" },
+                    class: "text-xs text-red-400 hover:text-red-600 border border-red-100 px-2 py-1 rounded-lg" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="px-5 py-12 text-center text-gray-400">
+            No categories. <%= link_to "Add one", new_admin_category_path, class: "text-rose-600 hover:underline" %>.
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

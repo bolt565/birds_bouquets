@@ -1,0 +1,9 @@
+roses_image:
+  product: red_roses
+  position: 0
+  alt_text: "Classic red roses bouquet arrangement"
+
+sunflowers_image:
+  product: sunflowers
+  position: 0
+  alt_text: "Bright sunflower bouquet"

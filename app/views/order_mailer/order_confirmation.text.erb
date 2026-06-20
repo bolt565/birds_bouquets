@@ -1,0 +1,26 @@
+Order Confirmed! — Birds Bouquets
+Order: <%= @order.order_number %>
+
+Hi <%= @order.shipping_name %>,
+
+Thank you for your order! We're preparing your beautiful flowers now.
+
+ITEMS ORDERED
+<% @order.order_items.each do |item| %>
+- <%= item.product_name %> x<%= item.quantity %>: <%= format_cents(item.line_total_cents) %>
+<% end %>
+
+Total: <%= format_cents(@order.total_cents) %>
+
+DELIVERY ADDRESS
+<%= @order.shipping_name %>
+<%= @order.shipping_line1 %><%= ", #{@order.shipping_line2}" if @order.shipping_line2.present? %>
+<%= @order.shipping_city %>, <%= @order.shipping_state %> <%= @order.shipping_zip %>
+
+Track your order: <%= orders_url %>
+
+Questions? hello@birdsbouquets.com
+
+---
+Birds Bouquets — Fresh flowers, delivered with love.
+<%= root_url %>

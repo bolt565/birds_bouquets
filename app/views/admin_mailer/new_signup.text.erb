@@ -1,0 +1,7 @@
+New Customer Signup
+
+Name: <%= @user.name %>
+Email: <%= @user.email %>
+Joined: <%= @user.created_at.strftime("%B %d, %Y") %>
+
+View customer: <%= admin_customer_url(@user) %>

@@ -1,0 +1,115 @@
+# Birds Bouquets — Complete Reference
+
+## Company Overview
+
+Birds Bouquets is a modern e-commerce flower delivery platform founded to make beautiful, fresh flowers accessible to everyone. We source directly from local and regional growers, offering fair prices and a quality guarantee on every order.
+
+Website: https://birdsbouquets.com
+
+## Product Catalog
+
+### Bouquets
+- Classic Red Roses (12 stems) — $49.99 — A dozen premium red roses, symbol of love and romance. Perfect for anniversaries, Valentine's Day, or saying "I love you."
+- Pink Garden Bouquet — $34.99 — A lush mix of pink roses, peonies, and ranunculus. Soft and romantic.
+- Sunflower Bouquet — $29.99 — Bright yellow sunflowers to cheer anyone up. Available year-round.
+- Wildflower Mix — $27.99 — Seasonal wildflowers in a rustic arrangement. Changes with the season.
+- White Lily Bouquet — $39.99 — Elegant white lilies for sympathy, celebrations, or just because.
+
+### Single Stems
+- Long-Stem Red Rose — $7.99 each — Premium single red rose with full greenery.
+- Tulips — $4.99 each — Fresh tulips in red, pink, yellow, purple, or white.
+- Sunflower — $5.99 each — Single sunflower with stem.
+
+### Arrangements
+- Countryside Arrangement — $54.99 — Mixed country-style arrangement in a ceramic vase (vase included).
+- Garden Party Arrangement — $64.99 — Lush garden-inspired arrangement with hydrangeas, roses, and greenery.
+
+### Seasonal
+- Spring Collection — starting at $32.99 — Seasonal spring flowers including tulips, daffodils, and hyacinths.
+- Summer Brights — starting at $29.99 — Bold summer colors: sunflowers, zinnias, marigolds.
+
+### Gift Sets
+- Flowers + Vase — $44.99 — Any bouquet paired with a simple glass vase.
+- Flowers + Card — $27.99 — Bouquet with a handwritten gift card.
+
+## Categories
+
+1. Bouquets — Professionally arranged flower bundles
+2. Single Stems — Individual flowers for custom arrangements
+3. Arrangements — Flowers in vases, ready to display
+4. Seasonal — What's fresh and in season
+5. Gift Sets — Flowers bundled with gifts and cards
+
+## Ordering Process
+
+1. Browse at https://birdsbouquets.com/products
+2. Select flowers and add to cart
+3. Proceed to checkout (no account required)
+4. Enter shipping address
+5. Pay with credit card (Visa, Mastercard, Amex, Discover) via Stripe
+6. Receive email confirmation with order number
+7. Track order at https://birdsbouquets.com/orders/lookup
+
+## Delivery Information
+
+- Same-day delivery: orders placed before 12 PM local time
+- Standard delivery: 1-3 business days
+- Coverage: Continental United States
+- Shipping cost: $8.99 flat, free on orders $75+
+
+## Flower Care Tips
+
+1. Trim stems at a 45-degree angle under running water
+2. Place in a clean vase with fresh, cool water
+3. Add flower food if provided
+4. Keep away from direct sunlight, heat, and drafts
+5. Change water every 2 days and re-trim stems
+6. Remove wilting petals promptly to extend arrangement life
+
+## Frequently Asked Questions
+
+Q: How fresh are the flowers?
+A: Our flowers are sourced fresh daily. We guarantee they'll stay fresh for at least 7 days with proper care.
+
+Q: Can I send flowers as a gift?
+A: Yes! Just enter the recipient's address at checkout and add a personal note. We'll deliver directly to them.
+
+Q: What if my flowers arrive damaged?
+A: Contact us within 24 hours with your order number and a photo. We'll provide a replacement or full refund.
+
+Q: Do you need an account to order?
+A: No. You can order as a guest using just your email address.
+
+Q: How do I track my order?
+A: Visit https://birdsbouquets.com/orders/lookup and enter your email and order number.
+
+Q: What payment methods do you accept?
+A: All major credit cards via Stripe. We do not store card information.
+
+Q: Can I cancel or change my order?
+A: Contact us within 2 hours of placing your order. After that, your arrangement may already be in preparation.
+
+Q: Do you offer subscriptions?
+A: Coming soon! Sign up for our newsletter to be notified at launch.
+
+## Return & Refund Policy
+
+- Freshness guarantee: 7 days with proper care
+- Report issues: within 24 hours of delivery
+- Resolution: full refund or free replacement
+- Method: email hello@birdsbouquets.com or use the contact form
+- Proof: photo of the flowers required
+
+## Company Values
+
+- Quality: only fresh flowers from trusted growers
+- Accessibility: beautiful flowers at honest prices
+- Sustainability: working with local and regional growers where possible
+- Service: 100% satisfaction guarantee, no questions asked
+
+## Contact Information
+
+- Website: https://birdsbouquets.com
+- Email: hello@birdsbouquets.com
+- Contact form: https://birdsbouquets.com/contact
+- Order tracking: https://birdsbouquets.com/orders/lookup
