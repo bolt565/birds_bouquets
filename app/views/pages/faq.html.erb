@@ -1,0 +1,29 @@
+<% content_for :title, "FAQ — Birds Bouquets" %>
+<% content_for :meta_description, "Frequently asked questions about Birds Bouquets flower delivery — freshness, delivery, care, and more." %>
+
+<div class="max-w-3xl mx-auto">
+  <h1 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
+  <p class="text-gray-500 mb-10">Everything you need to know about ordering flowers from Birds Bouquets.</p>
+
+  <div class="space-y-4">
+    <% @faqs.each_with_index do |faq, i| %>
+      <details class="group bg-white border border-gray-100 rounded-xl overflow-hidden" <%= i == 0 ? "open" : "" %>>
+        <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-semibold text-gray-900 hover:text-rose-600 transition-colors list-none">
+          <%= faq[:question] %>
+          <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+        <div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-50 pt-4">
+          <%= faq[:answer] %>
+        </div>
+      </details>
+    <% end %>
+  </div>
+
+  <div class="mt-12 bg-rose-50 rounded-xl p-8 text-center">
+    <h2 class="text-xl font-bold text-gray-900 mb-2">Still have questions?</h2>
+    <p class="text-gray-500 mb-4">Our team is happy to help.</p>
+    <%= link_to "Contact Us", contact_path, class: "inline-flex items-center px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 transition-colors" %>
+  </div>
+</div>

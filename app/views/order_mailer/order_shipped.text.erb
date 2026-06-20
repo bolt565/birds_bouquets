@@ -1,0 +1,20 @@
+Your Order Has Shipped! — Birds Bouquets
+Order: <%= @order.order_number %>
+
+Hi <%= @order.shipping_name %>,
+
+Great news! Your flowers are on their way.
+
+<% if @order.tracking_number.present? %>
+TRACKING NUMBER: <%= @order.tracking_number %>
+<% end %>
+
+Shipping to: <%= @order.shipping_name %>, <%= @order.shipping_city %>, <%= @order.shipping_state %>
+
+View your order: <%= orders_url %>
+
+Flower care tip: When your order arrives, trim the stems at a 45-degree angle under water and place immediately in a clean vase with fresh water. Keep away from direct sunlight and change the water every 2 days.
+
+---
+Birds Bouquets — Fresh flowers, delivered with love.
+<%= root_url %>

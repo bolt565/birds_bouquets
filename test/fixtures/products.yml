@@ -1,0 +1,30 @@
+red_roses:
+  name: "Classic Red Roses"
+  slug: "classic-red-roses"
+  description: "Beautiful red roses"
+  price_cents: 4999
+  compare_at_price_cents: 6499
+  category: bouquets
+  in_stock: true
+  featured: true
+  position: 1
+
+sunflowers:
+  name: "Sunflower Bouquet"
+  slug: "sunflower-bouquet"
+  description: "Bright sunflowers"
+  price_cents: 2999
+  category: bouquets
+  in_stock: true
+  featured: false
+  position: 2
+
+out_of_stock_product:
+  name: "Rare Winter Rose"
+  slug: "rare-winter-rose"
+  description: "Rare winter rose"
+  price_cents: 9999
+  category: bouquets
+  in_stock: false
+  featured: false
+  position: 3

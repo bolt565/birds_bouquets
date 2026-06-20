@@ -1,0 +1,7 @@
+Daily Digest — <%= @date.strftime("%B %d, %Y") %>
+
+Orders: <%= @order_count %>
+Revenue: $<%= (@revenue_cents / 100.0).round(2) %>
+New Customers: <%= @new_customers %>
+
+View dashboard: <%= admin_root_url %>

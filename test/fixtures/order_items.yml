@@ -1,0 +1,20 @@
+roses_in_pending_order:
+  order: pending_order
+  product: red_roses
+  quantity: 1
+  unit_price_cents: 4999
+  product_name: "Classic Red Roses"
+
+sunflowers_in_paid_order:
+  order: paid_order
+  product: sunflowers
+  quantity: 1
+  unit_price_cents: 2999
+  product_name: "Sunflower Bouquet"
+
+roses_in_shipped_order:
+  order: shipped_order
+  product: red_roses
+  quantity: 1
+  unit_price_cents: 4999
+  product_name: "Classic Red Roses"

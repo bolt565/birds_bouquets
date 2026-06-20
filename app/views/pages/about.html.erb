@@ -1,0 +1,45 @@
+<% content_for :title, "About Us — Birds Bouquets" %>
+<% content_for :meta_description, "Learn about Birds Bouquets — our mission to bring beautiful, fresh flowers to every doorstep." %>
+
+<div class="max-w-4xl mx-auto">
+  <div class="text-center mb-14">
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">Our Story</h1>
+    <p class="text-xl text-gray-500 max-w-2xl mx-auto">Born from a love of flowers and a belief that beauty should be accessible to everyone.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">From Garden to Doorstep</h2>
+      <p class="text-gray-600 leading-relaxed mb-4">
+        Birds Bouquets started with a simple idea: what if the most beautiful flowers found in local gardens could arrive at anyone's door, fresh and full of life?
+      </p>
+      <p class="text-gray-600 leading-relaxed">
+        We work directly with local and regional growers, cutting out the middleman so you get the freshest blooms at fair prices. Every arrangement is handcrafted with care by our talented team of floral designers.
+      </p>
+    </div>
+    <div class="bg-gradient-to-br from-rose-50 to-pink-100 rounded-2xl h-64 flex items-center justify-center">
+      <span class="text-8xl">🌸</span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <div class="bg-white border border-gray-100 rounded-xl p-6 text-center">
+      <p class="text-4xl font-bold text-rose-600 mb-2">7+</p>
+      <p class="text-sm text-gray-500 font-medium">Days Fresh Guaranteed</p>
+    </div>
+    <div class="bg-white border border-gray-100 rounded-xl p-6 text-center">
+      <p class="text-4xl font-bold text-rose-600 mb-2">50+</p>
+      <p class="text-sm text-gray-500 font-medium">Local Grower Partners</p>
+    </div>
+    <div class="bg-white border border-gray-100 rounded-xl p-6 text-center">
+      <p class="text-4xl font-bold text-rose-600 mb-2">100%</p>
+      <p class="text-sm text-gray-500 font-medium">Happiness Guarantee</p>
+    </div>
+  </div>
+
+  <div class="bg-gray-900 rounded-2xl p-10 text-white text-center">
+    <h2 class="text-2xl font-bold mb-4">Ready to send some joy?</h2>
+    <p class="text-gray-400 mb-6">Browse our curated collection of fresh arrangements.</p>
+    <%= link_to "Shop Now", products_path, class: "inline-flex items-center px-8 py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors" %>
+  </div>
+</div>

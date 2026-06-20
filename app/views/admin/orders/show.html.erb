@@ -1,0 +1,96 @@
+<% content_for :title, "Order #{@order.order_number} — Admin" %>
+
+<div class="mb-6 flex items-center gap-4">
+  <%= link_to "← Orders", admin_orders_path, class: "text-sm text-gray-400 hover:text-gray-600" %>
+  <h1 class="text-2xl font-bold text-gray-900">Order <%= @order.order_number %></h1>
+  <span class="px-3 py-1 rounded-full text-sm font-semibold <%= order_status_color(@order.status) %>">
+    <%= @order.status.humanize %>
+  </span>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="lg:col-span-2 space-y-5">
+    <div class="bg-white border border-gray-200 rounded-xl p-6">
+      <h2 class="font-semibold text-gray-900 mb-4">Order Items</h2>
+      <div class="space-y-3">
+        <% @order.order_items.each do |item| %>
+          <div class="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
+            <div class="w-10 h-10 bg-rose-50 rounded-lg text-center text-lg leading-10 flex-shrink-0">🌸</div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-900"><%= item.product_name %></p>
+              <p class="text-xs text-gray-400">Qty: <%= item.quantity %> &times; <%= format_cents(item.unit_price_cents) %></p>
+            </div>
+            <p class="text-sm font-semibold text-gray-900"><%= format_cents(item.line_total_cents) %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="border-t border-gray-100 pt-4 mt-2 space-y-1">
+        <div class="flex justify-between text-sm text-gray-500"><span>Subtotal</span><span><%= format_cents(@order.subtotal_cents) %></span></div>
+        <div class="flex justify-between text-sm text-gray-500"><span>Shipping</span><span class="text-green-600">Free</span></div>
+        <div class="flex justify-between font-bold text-gray-900"><span>Total</span><span><%= format_cents(@order.total_cents) %></span></div>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl p-6">
+      <h2 class="font-semibold text-gray-900 mb-4">Update Status</h2>
+      <% allowed_transitions = Order::VALID_TRANSITIONS[@order.status] || [] %>
+      <% if allowed_transitions.any? %>
+        <%= form_with url: update_status_admin_order_path(@order), method: :patch do |f| %>
+          <div class="flex gap-3 items-end flex-wrap">
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">New Status</label>
+              <%= f.select :status, allowed_transitions.map { |s| [s.humanize, s] },
+                  {},
+                  class: "border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+            </div>
+            <div class="flex-1">
+              <label class="block text-xs font-medium text-gray-500 mb-1">Tracking Number (required for shipped)</label>
+              <%= f.text_field :tracking_number, value: @order.tracking_number, placeholder: "e.g. 1Z999AA10123456784",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+            </div>
+            <%= f.submit "Update", class: "px-4 py-2 bg-gray-800 text-white text-sm rounded-lg hover:bg-gray-900 cursor-pointer" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-sm text-gray-400">This order is in a terminal state (<%= @order.status %>) and cannot be transitioned further.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-5">
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Customer</h2>
+      <p class="text-gray-700 font-medium"><%= @order.email %></p>
+      <% if @order.user %>
+        <%= link_to "View Customer", admin_customer_path(@order.user), class: "text-xs text-rose-600 hover:underline mt-1 block" %>
+      <% else %>
+        <p class="text-xs text-gray-400 mt-1">Guest order</p>
+      <% end %>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Shipping Address</h2>
+      <p class="text-gray-700"><%= @order.shipping_name %></p>
+      <p class="text-gray-600"><%= @order.shipping_line1 %><%= ", #{@order.shipping_line2}" if @order.shipping_line2.present? %></p>
+      <p class="text-gray-600"><%= @order.shipping_city %>, <%= @order.shipping_state %> <%= @order.shipping_zip %></p>
+      <p class="text-gray-600"><%= @order.shipping_country %></p>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Payment</h2>
+      <p class="text-gray-500">Stripe: <code class="text-xs bg-gray-100 px-1 rounded"><%= @order.stripe_payment_intent_id.to_s.truncate(30) %></code></p>
+      <% if @order.paid_at %><p class="text-gray-500 mt-1">Paid: <%= @order.paid_at.strftime("%b %d, %Y %H:%M") %></p><% end %>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Timeline</h2>
+      <div class="space-y-1.5 text-xs text-gray-500">
+        <p>Created: <%= @order.created_at.strftime("%b %d, %Y %H:%M") %></p>
+        <% if @order.paid_at %><p>Paid: <%= @order.paid_at.strftime("%b %d, %Y %H:%M") %></p><% end %>
+        <% if @order.shipped_at %><p>Shipped: <%= @order.shipped_at.strftime("%b %d, %Y %H:%M") %></p><% end %>
+        <% if @order.delivered_at %><p>Delivered: <%= @order.delivered_at.strftime("%b %d, %Y %H:%M") %></p><% end %>
+        <% if @order.cancelled_at %><p>Cancelled: <%= @order.cancelled_at.strftime("%b %d, %Y %H:%M") %></p><% end %>
+      </div>
+    </div>
+  </div>
+</div>

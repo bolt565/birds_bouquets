@@ -1,0 +1,49 @@
+<% content_for :title, "Customer — Admin" %>
+
+<div class="mb-6 flex items-center gap-4">
+  <%= link_to "← Customers", admin_customers_path, class: "text-sm text-gray-400 hover:text-gray-600" %>
+  <h1 class="text-2xl font-bold text-gray-900"><%= @customer.email %></h1>
+  <% if @customer.admin? %>
+    <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-semibold">Admin</span>
+  <% end %>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="lg:col-span-2">
+    <div class="bg-white border border-gray-200 rounded-xl p-6 mb-5">
+      <h2 class="font-semibold text-gray-900 mb-4">Order History</h2>
+      <% if @orders.any? %>
+        <div class="space-y-3">
+          <% @orders.each do |order| %>
+            <div class="flex items-center justify-between text-sm py-2 border-b border-gray-50 last:border-0">
+              <div>
+                <%= link_to order.order_number, admin_order_path(order), class: "font-semibold text-gray-900 hover:text-rose-600" %>
+                <p class="text-xs text-gray-400"><%= order.created_at.strftime("%b %d, %Y") %></p>
+              </div>
+              <div class="text-right">
+                <p class="font-semibold text-gray-900"><%= format_cents(order.total_cents) %></p>
+                <span class="text-xs px-2 py-0.5 rounded-full <%= order_status_color(order.status) %>"><%= order.status.humanize %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-gray-400 text-sm">No orders yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-5">
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Customer Info</h2>
+      <p class="text-gray-600"><%= @customer.email %></p>
+      <% if @customer.name.present? %><p class="text-gray-600"><%= @customer.name %></p><% end %>
+      <p class="text-gray-400 text-xs mt-2">Joined: <%= @customer.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-xl p-5 text-sm">
+      <h2 class="font-semibold text-gray-900 mb-3">Stats</h2>
+      <p class="text-gray-600"><%= @orders.count %> total orders</p>
+      <p class="font-semibold text-gray-900"><%= format_cents(@orders.paid_orders.sum(:total_cents)) %> lifetime value</p>
+    </div>
+  </div>
+</div>

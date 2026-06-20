@@ -1,0 +1,37 @@
+<% content_for :title, "Flower Blog — Birds Bouquets" %>
+<% content_for :meta_description, "Read our blog for flower care tips, seasonal guides, and floral inspiration from Birds Bouquets." %>
+
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-3xl font-bold text-gray-900 mb-2">The Birds Bouquets Blog</h1>
+  <p class="text-gray-500 mb-10">Flower care tips, seasonal guides, and floral inspiration.</p>
+
+  <% if @posts.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <% @posts.each do |post| %>
+        <article class="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+          <div class="h-48 bg-gradient-to-br from-rose-50 to-pink-100 flex items-center justify-center text-5xl">
+            🌸
+          </div>
+          <div class="p-6">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">
+              <%= link_to post.title, blog_show_path(post.slug), class: "hover:text-rose-600 transition-colors" %>
+            </h2>
+            <% if post.excerpt.present? %>
+              <p class="text-gray-500 text-sm line-clamp-3 mb-4"><%= post.excerpt %></p>
+            <% end %>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span><%= post.published_at&.strftime("%B %d, %Y") %></span>
+              <%= link_to "Read More →", blog_show_path(post.slug), class: "text-rose-600 hover:text-rose-700 font-medium" %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-20 text-gray-400">
+      <p class="text-5xl mb-4">📝</p>
+      <h2 class="text-lg font-medium text-gray-500">No posts yet</h2>
+      <p class="text-sm mt-2">Check back soon for flower tips and inspiration!</p>
+    </div>
+  <% end %>
+</div>

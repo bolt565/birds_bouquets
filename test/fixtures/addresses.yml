@@ -1,0 +1,11 @@
+alice_home:
+  user: regular_user
+  name: "Alice Smith"
+  line1: "123 Main Street"
+  city: "Austin"
+  state: "TX"
+  zip: "78701"
+  country: "US"
+  phone: "555-1234"
+  default: true
+  label: "Home"

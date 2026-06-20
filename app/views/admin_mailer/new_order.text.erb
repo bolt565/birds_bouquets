@@ -1,0 +1,8 @@
+New Order: <%= @order.order_number %>
+
+Customer: <%= @order.shipping_name %> (<%= @order.email %>)
+Total: <%= @order.total_in_dollars %>
+Items: <%= @order.order_items.count %>
+Ship To: <%= @order.shipping_city %>, <%= @order.shipping_state %>
+
+View in admin: <%= admin_order_url(@order) %>

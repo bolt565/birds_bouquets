@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9fafb; margin: 0; padding: 20px; color: #111827; }
+    .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; }
+    .header { background: #111827; padding: 24px 32px; }
+    .header h1 { color: white; margin: 0; font-size: 18px; font-weight: 600; }
+    .body { padding: 32px; font-size: 14px; }
+    .row { padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
+    .label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .message-box { background: #f9fafb; border-radius: 8px; padding: 16px; margin-top: 16px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>New Contact Message</h1>
+    </div>
+    <div class="body">
+      <div class="row">
+        <div class="label">From</div>
+        <div><%= @name %></div>
+      </div>
+      <div class="row">
+        <div class="label">Email</div>
+        <div><a href="mailto:<%= @email %>"><%= @email %></a></div>
+      </div>
+      <div class="label" style="margin-top: 16px;">Message</div>
+      <div class="message-box"><%= @message %></div>
+
+      <p style="margin-top: 24px; font-size: 12px; color: #9ca3af;">Reply directly to this email to respond to <%= @name %>.</p>
+    </div>
+  </div>
+</body>
+</html>

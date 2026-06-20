@@ -1,0 +1,7 @@
+announcement_banner:
+  key: announcement_banner
+  value: "Free delivery on orders over $75!"
+
+free_delivery_threshold:
+  key: free_delivery_threshold
+  value: "7500"

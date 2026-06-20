@@ -1,0 +1,19 @@
+home_visit:
+  user: regular_user
+  landing_url: /
+  referring_url:
+  utm_source:
+  utm_medium:
+  utm_campaign:
+  ip_address: "127.0.0.1"
+  user_agent: "Mozilla/5.0 (Macintosh)"
+
+product_visit:
+  user:
+  landing_url: /products/classic-red-roses
+  referring_url: /
+  utm_source: google
+  utm_medium: cpc
+  utm_campaign: spring_flowers
+  ip_address: "192.168.1.1"
+  user_agent: "Mozilla/5.0 (iPhone)"

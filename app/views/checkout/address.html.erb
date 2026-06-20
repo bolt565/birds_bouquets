@@ -1,0 +1,108 @@
+<% content_for :title, "Checkout — Birds Bouquets" %>
+
+<div class="max-w-2xl mx-auto">
+  <div class="mb-8">
+    <div class="flex items-center gap-4 text-sm">
+      <span class="flex items-center gap-2 font-semibold text-rose-600">
+        <span class="w-6 h-6 bg-rose-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+        Address
+      </span>
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <span class="flex items-center gap-2 text-gray-400">
+        <span class="w-6 h-6 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center text-xs">2</span>
+        Payment
+      </span>
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <span class="flex items-center gap-2 text-gray-400">
+        <span class="w-6 h-6 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center text-xs">3</span>
+        Confirm
+      </span>
+    </div>
+  </div>
+
+  <h1 class="text-2xl font-bold text-gray-900 mb-6">Delivery Address</h1>
+
+  <% if user_signed_in? && @addresses.any? %>
+    <div class="mb-8">
+      <h2 class="text-sm font-semibold text-gray-700 mb-3">Saved Addresses</h2>
+      <%= form_with url: checkout_address_url, method: :post do |f| %>
+        <div class="space-y-3 mb-4">
+          <% @addresses.each do |addr| %>
+            <label class="flex items-start gap-3 p-4 border rounded-xl cursor-pointer hover:border-rose-300 transition-colors has-[:checked]:border-rose-500 has-[:checked]:bg-rose-50">
+              <%= f.radio_button :saved_address_id, addr.id, checked: @selected_address&.id == addr.id,
+                  class: "mt-1 text-rose-600 focus:ring-rose-300" %>
+              <div class="text-sm">
+                <p class="font-semibold text-gray-900"><%= addr.name %></p>
+                <p class="text-gray-600"><%= addr.line1 %><%= ", #{addr.line2}" if addr.line2.present? %></p>
+                <p class="text-gray-600"><%= addr.city %>, <%= addr.state %> <%= addr.zip %></p>
+              </div>
+            </label>
+          <% end %>
+        </div>
+        <%= f.submit "Use Selected Address", class: "w-full py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors cursor-pointer" %>
+      <% end %>
+      <div class="my-6 flex items-center gap-4 text-sm text-gray-400">
+        <div class="flex-1 h-px bg-gray-200"></div>
+        <span>or enter a new address</span>
+        <div class="flex-1 h-px bg-gray-200"></div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with url: checkout_address_url, method: :post, html: { class: "space-y-4" } do |f| %>
+    <div>
+      <%= f.label :name, "Full Name", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field "address[name]", placeholder: "Jane Smith", required: true,
+          class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div>
+      <%= f.label :line1, "Address Line 1", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field "address[line1]", placeholder: "123 Main St", required: true,
+          class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div>
+      <%= f.label :line2, "Address Line 2 (optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field "address[line2]", placeholder: "Apt 4B",
+          class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :city, "City", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field "address[city]", required: true,
+            class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+      </div>
+      <div>
+        <%= f.label :state, "State", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field "address[state]", placeholder: "NY", required: true,
+            class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :zip, "ZIP Code", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field "address[zip]", required: true,
+            class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+      </div>
+      <div>
+        <%= f.label :phone, "Phone (optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.telephone_field "address[phone]",
+            class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+      </div>
+    </div>
+
+    <% if user_signed_in? %>
+      <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+        <%= f.check_box :save_address, class: "text-rose-600 focus:ring-rose-300 rounded" %>
+        Save this address for future orders
+      </label>
+    <% end %>
+
+    <div class="pt-2">
+      <%= f.submit "Continue to Payment", class: "w-full py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,42 @@
+<% content_for :title, "Order Confirmed — Birds Bouquets" %>
+
+<div class="max-w-lg mx-auto text-center py-12">
+  <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+    <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+    </svg>
+  </div>
+
+  <h1 class="text-3xl font-bold text-gray-900 mb-3">Order Confirmed!</h1>
+
+  <% if @order %>
+    <p class="text-gray-500 mb-2">Your order number is:</p>
+    <p class="text-2xl font-bold text-rose-600 mb-6"><%= @order.order_number %></p>
+    <p class="text-gray-500 mb-8">
+      We've sent a confirmation email to <strong><%= @order.email %></strong>.<br>
+      Your flowers are being prepared with love!
+    </p>
+
+    <div class="bg-gray-50 rounded-xl p-6 text-left mb-8">
+      <h2 class="font-semibold text-gray-900 mb-3">Order Details</h2>
+      <% @order.order_items.each do |item| %>
+        <div class="flex justify-between text-sm py-1.5 border-b border-gray-100 last:border-0">
+          <span class="text-gray-700"><%= item.product_name %> &times; <%= item.quantity %></span>
+          <span class="font-medium"><%= format_cents(item.line_total_cents) %></span>
+        </div>
+      <% end %>
+      <div class="flex justify-between font-bold text-gray-900 pt-3">
+        <span>Total</span>
+        <span><%= format_cents(@order.total_cents) %></span>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <%= link_to "Track My Order", order_path(@order), class: "inline-flex items-center px-6 py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors" %>
+      <%= link_to "Continue Shopping", products_path, class: "inline-flex items-center px-6 py-3 border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors" %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 mb-8">Thank you for your order! Check your email for confirmation details.</p>
+    <%= link_to "Continue Shopping", products_path, class: "inline-flex items-center px-6 py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors" %>
+  <% end %>
+</div>

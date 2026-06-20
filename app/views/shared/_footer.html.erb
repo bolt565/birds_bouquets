@@ -1,0 +1,42 @@
+<footer class="bg-gray-900 text-gray-300 mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">Birds Bouquets</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">Fresh flower delivery to your door. Locally sourced, carefully arranged, joyfully delivered.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Shop</h4>
+        <ul class="space-y-2 text-sm">
+          <li><%= link_to "All Flowers", products_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "About Us", about_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "Blog", blog_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "FAQ", faq_path, class: "hover:text-white transition-colors" %></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Support</h4>
+        <ul class="space-y-2 text-sm">
+          <li><%= link_to "Contact Us", contact_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "Returns Policy", returns_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "Track Order", orders_lookup_path, class: "hover:text-white transition-colors" %></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><%= link_to "Privacy Policy", privacy_path, class: "hover:text-white transition-colors" %></li>
+          <li><%= link_to "Terms of Service", terms_path, class: "hover:text-white transition-colors" %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-gray-500">&copy; <%= Time.current.year %> Birds Bouquets. All rights reserved.</p>
+      <p class="text-xs text-gray-500">Fresh flowers, happy hearts.</p>
+    </div>
+  </div>
+</footer>

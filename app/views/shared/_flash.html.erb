@@ -1,0 +1,6 @@
+<% flash.each do |type, message| %>
+  <div class="flex items-center gap-3 px-4 py-3 rounded-lg border text-sm mb-2 <%= flash_class(type) %>">
+    <span class="flex-1"><%= message %></span>
+    <button onclick="this.parentElement.remove()" class="opacity-60 hover:opacity-100 font-bold text-lg leading-none">&times;</button>
+  </div>
+<% end %>

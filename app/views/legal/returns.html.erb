@@ -1,0 +1,44 @@
+<% content_for :title, "Returns Policy — Birds Bouquets" %>
+
+<div class="max-w-3xl mx-auto">
+  <h1 class="text-3xl font-bold text-gray-900 mb-4">Returns & Satisfaction Policy</h1>
+  <p class="text-gray-400 text-sm mb-8">Last updated: <%= Date.current.strftime("%B %d, %Y") %></p>
+
+  <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+    <h2 class="text-lg font-bold text-green-800 mb-2">Our Happiness Guarantee</h2>
+    <p class="text-green-700">If you're not 100% satisfied with your order, contact us within 24 hours of delivery and we'll make it right — no questions asked.</p>
+  </div>
+
+  <div class="prose prose-gray max-w-none">
+    <h2>What We Cover</h2>
+    <ul>
+      <li>Flowers that arrived wilted, damaged, or not fresh</li>
+      <li>Wrong items delivered</li>
+      <li>Missing items from your order</li>
+      <li>Delivery to the wrong address (our error)</li>
+    </ul>
+
+    <h2>How to Request Help</h2>
+    <ol>
+      <li>Contact us within 24 hours of delivery at hello@birdsbouquets.com</li>
+      <li>Include your order number and a brief description of the issue</li>
+      <li>Photos are helpful but not always required</li>
+    </ol>
+    <p>We'll respond within 4 hours during business hours and offer a replacement, store credit, or full refund — your choice.</p>
+
+    <h2>What We Don't Cover</h2>
+    <ul>
+      <li>Flowers that were not cared for properly after delivery</li>
+      <li>Natural variation in color or size due to seasonal availability</li>
+      <li>Issues reported more than 24 hours after delivery</li>
+      <li>Change of mind after the arrangement is prepared</li>
+    </ul>
+
+    <h2>Cancellations</h2>
+    <p>Orders can be cancelled for a full refund up to 2 hours after placing them. After that, we begin preparing your arrangement. Contact us immediately if you need to cancel.</p>
+  </div>
+
+  <div class="mt-8 text-center">
+    <%= link_to "Contact Us", contact_path, class: "inline-flex items-center px-6 py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors" %>
+  </div>
+</div>

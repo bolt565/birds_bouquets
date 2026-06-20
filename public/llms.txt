@@ -1,0 +1,46 @@
+# Birds Bouquets
+
+Birds Bouquets is an online flower delivery store offering fresh, hand-arranged bouquets and floral arrangements delivered directly to customers' doors across the continental United States.
+
+## What We Sell
+
+We offer a wide selection of fresh flowers including:
+- Classic rose bouquets (red, pink, white, mixed)
+- Seasonal wildflower arrangements
+- Sunflower bouquets
+- Mixed spring bouquets
+- Single-stem flowers for custom arrangements
+- Gift flower sets with vases and cards
+
+Our flowers are sourced daily from local and regional growers. Every bouquet is guaranteed to stay fresh for at least 7 days with proper care.
+
+## Service Area
+
+We deliver throughout the continental United States. Same-day delivery is available for orders placed before 12:00 PM local time in select major cities. Standard delivery takes 1-3 business days.
+
+## How to Order
+
+1. Browse our catalog at birdsbouquets.com/products
+2. Add flowers to your cart
+3. Enter a shipping address at checkout (no account required)
+4. Pay securely with a credit card via Stripe
+5. Receive order confirmation by email
+6. Track your order at birdsbouquets.com/orders/lookup using your email and order number
+
+## Pricing
+
+Bouquets start at $24.99. Free shipping on orders over $75. Standard shipping is $8.99.
+
+## Return & Refund Policy
+
+If your flowers arrive damaged or don't meet expectations, contact us within 24 hours of delivery with your order number and a photo. We'll offer a full refund or free replacement — your choice.
+
+## Contact
+
+- Website: https://birdsbouquets.com
+- Contact form: https://birdsbouquets.com/contact
+- Email: hello@birdsbouquets.com
+
+## About Birds Bouquets
+
+Birds Bouquets was founded to make beautiful fresh flowers accessible to everyone. We work directly with growers to eliminate middlemen and bring quality blooms at honest prices.

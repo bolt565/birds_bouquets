@@ -1,0 +1,32 @@
+<% content_for :title, "Track Your Order — Birds Bouquets" %>
+
+<div class="max-w-lg mx-auto">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Track Your Order</h1>
+    <p class="text-gray-500">Enter your email and order number to find your order.</p>
+  </div>
+
+  <div class="bg-white border border-gray-100 rounded-xl p-8">
+    <%= form_with url: orders_find_path, method: :post do |f| %>
+      <div class="space-y-4">
+        <div>
+          <%= f.label :email, "Email Address", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= f.email_field :email, required: true, placeholder: "your@email.com",
+              class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+        </div>
+
+        <div>
+          <%= f.label :order_number, "Order Number", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= f.text_field :order_number, required: true, placeholder: "BB-2024-00001",
+              class: "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300 uppercase" %>
+        </div>
+
+        <%= f.submit "Find Order", class: "w-full py-3 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-colors cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+
+  <p class="text-center text-sm text-gray-400 mt-6">
+    Have an account? <%= link_to "Sign in", new_user_session_path, class: "text-rose-600 hover:underline" %> to see all your orders.
+  </p>
+</div>

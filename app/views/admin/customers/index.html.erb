@@ -1,0 +1,51 @@
+<% content_for :title, "Customers — Admin" %>
+
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Customers</h1>
+</div>
+
+<div class="bg-white rounded-xl border border-gray-200 mb-4 p-4">
+  <%= form_with url: admin_customers_path, method: :get, data: { turbo: false } do |f| %>
+    <div class="flex gap-3">
+      <%= f.text_field :search, value: params[:search], placeholder: "Search by email or name...",
+          class: "flex-1 border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300" %>
+      <%= f.submit "Search", class: "px-4 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-800 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 border-b border-gray-200">
+      <tr>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Customer</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Orders</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Spent</th>
+        <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Joined</th>
+        <th class="px-5 py-3"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% if @customers.any? %>
+        <% @customers.each do |customer| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-5 py-3">
+              <p class="font-medium text-gray-900"><%= customer.name.presence || "—" %></p>
+              <p class="text-xs text-gray-400"><%= customer.email %></p>
+            </td>
+            <td class="px-5 py-3 text-gray-600"><%= customer.orders.count %></td>
+            <td class="px-5 py-3 font-semibold text-gray-900"><%= format_cents(customer.orders.paid_orders.sum(:total_cents)) %></td>
+            <td class="px-5 py-3 text-gray-400 text-xs"><%= customer.created_at.strftime("%b %d, %Y") %></td>
+            <td class="px-5 py-3">
+              <%= link_to "View", admin_customer_path(customer), class: "text-xs text-rose-600 hover:underline font-medium" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="px-5 py-12 text-center text-gray-400">No customers found.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
