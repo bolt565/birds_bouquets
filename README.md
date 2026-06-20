@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+STRIPE LISTEN:
+stripe listen --forward-to localhost:9091/stripe_webhooks
