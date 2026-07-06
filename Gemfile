@@ -25,7 +25,7 @@ gem "good_job", "~> 4.0"
 gem "stripe", "~> 13.0"
 
 # SEO
-gem "sitemap_generator", "~> 6.3"
+gem "sitemap_generator", "~> 7.1"
 
 # Rate limiting
 gem "rack-attack"
