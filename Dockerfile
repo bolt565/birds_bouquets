@@ -11,7 +11,8 @@ RUN apt-get update -qq && apt-get install -y \
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --without development test
+ENV BUNDLE_WITHOUT="development:test"
+RUN bundle install
 
 COPY . .
 
