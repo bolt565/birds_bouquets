@@ -3,9 +3,9 @@ module ApplicationHelper
 
   def flash_class(type)
     case type.to_sym
-    when :notice then "bg-green-50 border-green-200 text-green-800"
-    when :alert  then "bg-red-50 border-red-200 text-red-800"
-    else "bg-blue-50 border-blue-200 text-blue-800"
+    when :notice then "bg-sage-pale/60 border-sage text-moss"
+    when :alert  then "bg-blush border-blush-deep text-ink"
+    else "bg-linen border-sage-pale text-ink"
     end
   end
 

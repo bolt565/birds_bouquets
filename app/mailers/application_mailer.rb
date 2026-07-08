@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "Birds Bouquets <hello@birdsbouquets.com>"
+  default from: "Bird's Blossoms <hello@birdsbouquets.com>"
   layout "mailer"
   helper :application
 

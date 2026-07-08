@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><%= @seo_title.presence || "Admin — Birds Bouquets" %></title>
+    <title><%= @seo_title.presence || "Admin — Bird's Blossoms" %></title>
     <meta name="robots" content="noindex, nofollow">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,7 +15,7 @@
     <aside class="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
       <div class="p-6 border-b border-gray-700">
         <a href="<%= admin_root_path %>" class="text-xl font-bold text-rose-400">🌸 Admin</a>
-        <p class="text-xs text-gray-400 mt-1">Birds Bouquets</p>
+        <p class="text-xs text-gray-400 mt-1">Bird's Blossoms</p>
       </div>
       <nav class="flex-1 p-4 space-y-1">
         <%= link_to "Dashboard", admin_root_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors text-sm" %>

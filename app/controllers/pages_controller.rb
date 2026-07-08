@@ -6,8 +6,8 @@ class PagesController < ApplicationController
     @categories = Category.active.ordered
 
     seo_meta(
-      title: "Fresh Flower Delivery | Birds Bouquets",
-      description: "Buy beautiful fresh flowers online. Birds Bouquets delivers stunning flower bouquets and arrangements right to your door. Shop fresh flower delivery today.",
+      title: "Fresh Flower Delivery | Bird's Blossoms",
+      description: "Buy beautiful fresh flowers online. Bird's Blossoms delivers stunning flower bouquets and arrangements right to your door. Shop fresh flower delivery today.",
       url: root_url,
       keywords: "buy flowers online, fresh flower delivery, flower bouquets, flower arrangements"
     )
@@ -31,8 +31,8 @@ class PagesController < ApplicationController
     ]
 
     seo_meta(
-      title: "FAQ — Birds Bouquets",
-      description: "Answers to frequently asked questions about ordering flowers from Birds Bouquets. Learn about delivery, freshness, care, and more.",
+      title: "FAQ — Bird's Blossoms",
+      description: "Answers to frequently asked questions about ordering flowers from Bird's Blossoms. Learn about delivery, freshness, care, and more.",
       url: faq_url
     )
 
@@ -41,8 +41,8 @@ class PagesController < ApplicationController
 
   def about
     seo_meta(
-      title: "About Us — Birds Bouquets",
-      description: "Learn about Birds Bouquets — our mission to bring beautiful, fresh flowers to every doorstep. Quality blooms, exceptional service.",
+      title: "About Us — Bird's Blossoms",
+      description: "Learn about Bird's Blossoms — our mission to bring beautiful, fresh flowers to every doorstep. Quality blooms, exceptional service.",
       url: about_url
     )
   end

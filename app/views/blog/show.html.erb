@@ -1,4 +1,4 @@
-<% content_for :title, "#{@post.meta_title.presence || @post.title} — Birds Bouquets" %>
+<% content_for :title, "#{@post.meta_title.presence || @post.title} — Bird's Blossoms" %>
 <% content_for :meta_description, @post.meta_description.presence || @post.excerpt.to_s.truncate(160) %>
 <% content_for :canonical_url, blog_show_url(@post.slug) %>
 

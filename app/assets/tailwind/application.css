@@ -1,1 +1,44 @@
 @import "tailwindcss";
+
+/*
+ * Bird's Blossoms design tokens.
+ * Soft florist palette: cream paper, linen, blush pink, sage green, deep moss.
+ * Display face: Cormorant Garamond (letterspaced serif wordmark + headings).
+ * Body/UI face: Jost (quiet geometric sans).
+ */
+@theme {
+  --color-cream: #f8f3ec;
+  --color-linen: #ede6db;
+  --color-shell: #fdfbf7;
+  --color-blush: #f2dcda;
+  --color-blush-deep: #d9b6b2;
+  --color-sage-pale: #cbd3c1;
+  --color-sage: #a9b6a0;
+  --color-sage-deep: #7c8b71;
+  --color-moss: #55614b;
+  --color-ink: #414639;
+  --color-ink-soft: #7c8172;
+
+  --font-sans: "Jost", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-sage-deep);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-blush);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

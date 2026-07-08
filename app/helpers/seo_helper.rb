@@ -1,7 +1,7 @@
 module SeoHelper
-  SITE_NAME = "Birds Bouquets".freeze
+  SITE_NAME = "Bird's Blossoms".freeze
   BASE_URL = ENV.fetch("APP_HOST", "https://birdsbouquets.com").freeze
-  DEFAULT_DESCRIPTION = "Birds Bouquets — fresh flower delivery. Shop beautiful bouquets and arrangements online with fast delivery.".freeze
+  DEFAULT_DESCRIPTION = "Bird's Blossoms — fresh flower delivery. Shop beautiful bouquets and arrangements online with fast delivery.".freeze
 
   def seo_meta(title:, description:, url:, image: nil, keywords: nil)
     @seo_title = title

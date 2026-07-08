@@ -1,4 +1,4 @@
-puts "Seeding Birds Bouquets..."
+puts "Seeding Bird's Blossoms..."
 
 # Admin user
 admin_email = ENV.fetch("ADMIN_EMAIL", "admin@birdsbouquets.com")
@@ -43,7 +43,7 @@ products_data = [
     in_stock: true,
     featured: true,
     position: 1,
-    meta_title: "Buy Classic Red Roses Online — Birds Bouquets",
+    meta_title: "Buy Classic Red Roses Online — Bird's Blossoms",
     meta_description: "Order a dozen premium red roses with same-day delivery. Fresh, beautiful, guaranteed.",
     meta_keywords: "red roses, buy roses online, rose bouquet delivery"
   },
@@ -152,10 +152,10 @@ end
   {
     slug: "how-to-care-for-fresh-cut-flowers",
     title: "How to Care for Fresh Cut Flowers",
-    body: "Fresh cut flowers can last 7-14 days with proper care.\n\nTrim stems at a 45-degree angle under running water. Place in a clean vase with cool fresh water. Keep away from direct sunlight and heat. Change water every 2 days.\n\nWith these simple steps, your Birds Bouquets flowers will look beautiful for over a week.",
+    body: "Fresh cut flowers can last 7-14 days with proper care.\n\nTrim stems at a 45-degree angle under running water. Place in a clean vase with cool fresh water. Keep away from direct sunlight and heat. Change water every 2 days.\n\nWith these simple steps, your Bird's Blossoms flowers will look beautiful for over a week.",
     excerpt: "Keep your flowers looking beautiful for longer with these simple care tips.",
     status: "draft",
-    author_name: "Birds Bouquets Team"
+    author_name: "Bird's Blossoms Team"
   },
   {
     slug: "best-flowers-for-every-occasion",
@@ -163,7 +163,7 @@ end
     body: "Choosing the right flowers for the right moment makes all the difference.\n\nFor Romance: Red roses are classic, but pink peonies or garden roses offer a softer feel.\n\nFor Birthdays: Bright sunflowers, colorful wildflowers, or a vibrant mixed bouquet.\n\nFor Sympathy: White lilies, white roses, and soft pastels convey comfort.\n\nFor Congratulations: Bright cheerful colors — sunflowers, yellow roses, orange tulips.\n\nFor 'Just Because': Any flowers! The unexpected gesture is often most meaningful.",
     excerpt: "Our guide to choosing the perfect flowers for birthdays, anniversaries, sympathy, and more.",
     status: "draft",
-    author_name: "Birds Bouquets Team"
+    author_name: "Bird's Blossoms Team"
   }
 ].each do |data|
   BlogPost.find_or_create_by!(slug: data[:slug]) do |post|

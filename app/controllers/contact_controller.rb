@@ -3,8 +3,8 @@ class ContactController < ApplicationController
 
   def new
     seo_meta(
-      title: "Contact Us — Birds Bouquets",
-      description: "Get in touch with the Birds Bouquets team. We're here to help with your flower orders and questions.",
+      title: "Contact Us — Bird's Blossoms",
+      description: "Get in touch with the Bird's Blossoms team. We're here to help with your flower orders and questions.",
       url: contact_url
     )
   end

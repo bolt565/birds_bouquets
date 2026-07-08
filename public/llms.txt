@@ -1,6 +1,6 @@
-# Birds Bouquets
+# Bird's Blossoms
 
-Birds Bouquets is an online flower delivery store offering fresh, hand-arranged bouquets and floral arrangements delivered directly to customers' doors across the continental United States.
+Bird's Blossoms is an online flower delivery store offering fresh, hand-arranged bouquets and floral arrangements delivered directly to customers' doors across the continental United States.
 
 ## What We Sell
 
@@ -41,6 +41,6 @@ If your flowers arrive damaged or don't meet expectations, contact us within 24 
 - Contact form: https://birdsbouquets.com/contact
 - Email: hello@birdsbouquets.com
 
-## About Birds Bouquets
+## About Bird's Blossoms
 
-Birds Bouquets was founded to make beautiful fresh flowers accessible to everyone. We work directly with growers to eliminate middlemen and bring quality blooms at honest prices.
+Bird's Blossoms was founded to make beautiful fresh flowers accessible to everyone. We work directly with growers to eliminate middlemen and bring quality blooms at honest prices.

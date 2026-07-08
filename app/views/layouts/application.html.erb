@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><%= @seo_title.presence || "Birds Bouquets" %></title>
+    <title><%= @seo_title.presence || "Bird's Blossoms" %></title>
     <meta name="description" content="<%= @seo_description.presence || "Fresh flower delivery" %>">
     <% if @seo_canonical_url.present? %><link rel="canonical" href="<%= @seo_canonical_url %>"><% end %>
     <% if @seo_title.present? %>
@@ -17,11 +17,14 @@
     <%= render_structured_data %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="bg-gray-50 text-gray-900 min-h-screen">
+  <body class="bg-cream text-ink font-sans antialiased min-h-screen">
     <%= render "shared/nav" %>
     <div id="flash"><%= render "shared/flash" %></div>
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     end
 
     seo_meta(
-      title: @current_category ? "#{@current_category.name} — Birds Bouquets" : "Fresh Flowers — Birds Bouquets",
+      title: @current_category ? "#{@current_category.name} — Bird's Blossoms" : "Fresh Flowers — Bird's Blossoms",
       description: @current_category&.meta_description || "Shop our full collection of fresh flower bouquets and arrangements. Same-day delivery available.",
       url: products_url(category: params[:category]),
       keywords: "buy flowers online, fresh flowers, flower bouquets"
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     @related_products = Product.in_stock.where(category: @product.category).where.not(id: @product.id).limit(4)
 
     seo_meta(
-      title: @product.meta_title || "#{@product.name} — Birds Bouquets",
+      title: @product.meta_title || "#{@product.name} — Bird's Blossoms",
       description: @product.meta_description || @product.description.truncate(160),
       url: product_url(@product),
       keywords: @product.meta_keywords

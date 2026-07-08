@@ -6,8 +6,8 @@ class BlogController < ApplicationController
     @total_pages = (BlogPost.published.count / 12.0).ceil
 
     seo_meta(
-      title: "Flower Care Tips & Inspiration — Birds Bouquets Blog",
-      description: "Discover flower care tips, arrangement ideas, and floral inspiration on the Birds Bouquets blog.",
+      title: "Flower Care Tips & Inspiration — Bird's Blossoms Blog",
+      description: "Discover flower care tips, arrangement ideas, and floral inspiration on the Bird's Blossoms blog.",
       url: blog_url
     )
   end
@@ -16,7 +16,7 @@ class BlogController < ApplicationController
     @post = BlogPost.published.find_by!(slug: params[:slug])
 
     seo_meta(
-      title: @post.meta_title || "#{@post.title} — Birds Bouquets",
+      title: @post.meta_title || "#{@post.title} — Bird's Blossoms",
       description: @post.meta_description || @post.excerpt || @post.body.truncate(160),
       url: blog_show_url(slug: @post.slug),
       keywords: @post.meta_keywords
