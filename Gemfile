@@ -13,6 +13,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
+# Active Storage (S3-compatible: AWS S3 or Cloudflare R2)
+gem "aws-sdk-s3", require: false
+
 # Auth
 gem "devise", "~> 5.0"
 gem "omniauth-google-oauth2"
