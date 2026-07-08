@@ -37,6 +37,6 @@ RUN chown -R app:app /app
 USER app
 
 EXPOSE 3000
-ENV RAILS_ENV=production RAILS_LOG_TO_STDOUT=true
+ENV RAILS_ENV=production RAILS_LOG_TO_STDOUT=true BUNDLE_WITHOUT="development:test"
 
 CMD ["bash", "-c", "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0"]
