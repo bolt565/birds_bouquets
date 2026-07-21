@@ -22,7 +22,7 @@ gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 
 # Background jobs
-gem "good_job", "~> 4.0"
+gem "good_job", "~> 4.19"
 
 # Payments
 gem "stripe", "~> 13.0"
